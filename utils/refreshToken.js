@@ -5,18 +5,16 @@ const jwt = require('jsonwebtoken');
 // internal imports
 const User = require('../model/user/userSchema')
 
-// mongoose.Types.ObjectId.isValid('your id here');
 
 async function accessToken(req, res, next) {
-    const { refreshToken } = req.body;
-    const user = await User.findOne({email: req.user.email})
-    if (!user || !user.refreshToken.includes(refreshToken)) {
-        res.status(403).json({
-            message: "unauthorized user refresh token"
-        })
-    }
-
     try {
+        const { refreshToken } = req.body;
+        const user = await User.findOne({email: req.user.email})
+        if (!user || !user.refreshToken.includes(refreshToken)) {
+            res.status(403).json({
+                message: "unauthorized user refresh token"
+            })
+        }
         const decoded = await jwt.verify(refreshToken, process.env.JWT_SECRET_KEY)
         if (decoded) {
             const token = jwt.sign({ user: {
