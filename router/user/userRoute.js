@@ -15,10 +15,11 @@ router.post('/register', userValidation, validationHandler, userRegistrations)
 router.post('/login', userLogin)
 
 router.use(tokenValidation)
-router.get('/refresh-token', refreshToken)
+
 router.put('/user-update/:id', userInfoUpdate)
 router.put('/change-password/:id', userPasswordChange)
-router.get('/:id', userDetails)
+router.get('/details/:id', userDetails)
+router.get('/refresh-token', refreshToken)
 
 
 
