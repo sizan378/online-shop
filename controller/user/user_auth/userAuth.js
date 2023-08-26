@@ -35,11 +35,11 @@ async function userLogin(req, res, next) {
                             firstName: user.firstName,
                             lastName: user.lastName,
                             phoneNumber: user.phoneNumber,
-                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "10m"})
+                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "10h"})
 
             const refreshToken = jwt.sign({ user: {
                             id: user.id,
-                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "1h"})
+                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "10d"})
 
             await User.findOneAndUpdate({email: req.body.email}, {refreshToken: refreshToken})
             res.status(200).json({
