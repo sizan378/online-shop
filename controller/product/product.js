@@ -55,4 +55,18 @@ async function singleProduct(req, res, next) {
     }
 }
 
-module.exports = {createProduct, updateProduct, singleProduct }
+async function allProduct(req, res, next) {
+    try {
+        
+        const product = await Product.find();
+        res.status(200).json(product)
+        
+    } catch (error) {
+        res.status({
+            error: error.message,
+            stack: error.stack
+        })
+    }
+}
+
+module.exports = {createProduct, updateProduct, singleProduct, allProduct }
