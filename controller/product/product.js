@@ -6,14 +6,15 @@ const Product = require('../../model/product/productSchema')
 
 
 
-const createProduct = (req, res, next) => {
+async function createProduct(req, res, next)  {
     try {
-        console.log("request_body",req.body)
         let newProduct
+        const images = req.files.map(file => file.path)
         newProduct = new Product({
             ...req.body,
+            image:images,
         })
-        newProduct.save()
+        await newProduct.save()
         res.status(200).json({
             message: 'Product created successfully'
             })

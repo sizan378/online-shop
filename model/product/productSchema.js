@@ -29,13 +29,9 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    image: {
-        type: Array,
-        default: [{
-            url: String,
-            title: String,
-        }],
-    },
+    image: [{
+        type: String,
+    }],
     reviews: [{
         user: [{
             type: mongoose.Schema.Types.ObjectId,

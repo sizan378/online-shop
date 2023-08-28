@@ -13,13 +13,13 @@ const refreshToken = require('../../utils/refreshToken');
 
 router.post('/register', userValidation, validationHandler, userRegistrations)
 router.post('/login', userLogin)
-
+router.get('/refresh-token', refreshToken)
 router.use(tokenValidation)
 
 router.put('/user-update/:id', userInfoUpdate)
 router.put('/change-password/:id', userPasswordChange)
 router.get('/details/:id', userDetails)
-router.get('/refresh-token', refreshToken)
+
 
 
 
