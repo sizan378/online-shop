@@ -35,7 +35,7 @@ async function userLogin(req, res, next) {
                             firstName: user.firstName,
                             lastName: user.lastName,
                             phoneNumber: user.phoneNumber,
-                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "10h"})
+                        }}, process.env.JWT_SECRET_KEY, { expiresIn: "1h"})
 
             const refreshToken = jwt.sign({ user: {
                             id: user.id,

@@ -1,17 +1,19 @@
 //  external import
-const {check, body, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator')
+const fs = require('fs');
+const path = require('path')
 
 // internal import
 const Product = require('../../model/product/productSchema')
 
 
 const productValidation = [
-    check("title")
+    body("title")
         .isLength({ min: 1})
         .withMessage("title should not be empty")
         .trim(),
 
-    check("sku")
+    body("sku")
         .isLength({ min: 1})
         .withMessage("sku should not be empty")
         .custom(async (value) =>{
@@ -29,38 +31,52 @@ const productValidation = [
             }
         }),
 
-    check("productPrice")
+    body("productPrice")
         .isNumeric()
         .withMessage('Only Decimals allowed')
         .trim(),
 
-    check("sellingPrice")
+    body("sellingPrice")
         .isNumeric()
         .withMessage('Only Decimals allowed')
         .trim(),
 
-    check("description")
+    body("description")
         .isLength({ min: 1})
         .withMessage("description should not be empty")
         .trim(),
         
-    check("stock")
+    body("stock")
         .isNumeric()
         .withMessage('Only Decimals allowed')
         .trim(),
 ]
 
 
-const productValidationHandler = function(req, res, next) {
-    console.log("requested_product", req.body)
+async function productValidationHandler (req, res, next) {
     const error = validationResult(req)
     const mappedError = error.mapped()
-    console.log(mappedError)
 
     if (Object.keys(error.errors).length === 0) {
         next()
     } else {
-        res.status(500).json({
+        if (req.files.length > 0){
+            const filenames = req.files.map(file => file.path)
+            filenames.forEach(async filename => {
+                try {
+                  await fs.unlink(filename, (err) => {
+                    if (err) {
+                      console.error(`Error deleting file: ${filename}`);
+                    } else {
+                      console.log(`File deleted: ${filename}`);
+                    }
+                  });
+                } catch (error) {
+                  console.error(`Error deleting file: ${filename}`);
+                }
+              });
+        }
+        return res.status(500).json({
             message: mappedError
         })
     }
