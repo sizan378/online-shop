@@ -18,7 +18,6 @@ const productValidation = [
         .withMessage("sku should not be empty")
         .custom(async (value) =>{
             try {
-                console.log(value);
                 const product = await Product.findOne({ sku: value });
                 if (product) {
                     throw new Error("sku code already exists")
