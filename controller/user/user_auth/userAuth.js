@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../../model/user/userSchema')
 
 
-async function userRegistrations(req, res, next) {
+async function userRegistrations(req, res) {
     try {
         let newUser
         const passwordHash = await bcrypt.hash(req.body.password, 10)
@@ -25,7 +25,7 @@ async function userRegistrations(req, res, next) {
 }
 
 
-async function userLogin(req, res, next) {
+async function userLogin(req, res) {
     try {
         const user = await User.findOne({ email: req.body.email, is_active: true });
         if (user && await bcrypt.compare(req.body.password, user.password) ) {
@@ -57,7 +57,7 @@ async function userLogin(req, res, next) {
     }
 }
 
-async function userPasswordChange(req, res, next) {
+async function userPasswordChange(req, res) {
     try {
         oldPassword = req.body.oldPassword;
         const user = await User.findOne({email: req.user.email});
