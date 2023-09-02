@@ -6,7 +6,7 @@ const Product = require('../../model/product/productSchema')
 
 
 
-async function createProduct(req, res, next)  {
+async function createProduct(req, res)  {
     try {
         let newProduct
         const images = req.files.map(file => file.path)
@@ -26,7 +26,7 @@ async function createProduct(req, res, next)  {
     }
 }
 
-async function updateProduct(req, res, next) {
+async function updateProduct(req, res) {
     try {
         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
             const product = await Product.findByIdAndUpdate({_id: req.params.id}, {...req.body});
@@ -42,7 +42,7 @@ async function updateProduct(req, res, next) {
     }
 }
 
-async function singleProduct(req, res, next) {
+async function singleProduct(req, res) {
     try {
         if (mongoose.Types.ObjectId.isValid(req.params.id)) {
             const product = await Product.findById({_id: req.params.id});
@@ -56,7 +56,7 @@ async function singleProduct(req, res, next) {
     }
 }
 
-async function allProduct(req, res, next) {
+async function allProduct(req, res) {
     try {
         
         const product = await Product.find();

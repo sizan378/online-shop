@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 // internal imports
 const User = require('../../../model/user/userSchema')
 
-async function userDetails(req, res, next) {
+async function userDetails(req, res) {
     try {
         if(mongoose.Types.ObjectId.isValid(req.params.id)) {
             const user = await User.findById({_id: req.params.id})
