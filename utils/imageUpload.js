@@ -10,15 +10,12 @@ function profilePictureUpload(req, res, next) {
         filename: function(request, file, callback) {
             const file_name_ext = file.originalname.split(".");
             const file_name = file_name_ext[0];
-            console.log("file_name: ", file_name)
             const file_extension = file_name_ext[1];
-            console.log("file_extension: ", file_extension)
             callback(null, file_name + '_' + Date.now() + '.' + file_extension);
         },
     });
 
     const upload = multer({storage: storage}).array("image");
-    console.log("uploading", upload)
 
     upload(req, res, function(error){
         if (error){
