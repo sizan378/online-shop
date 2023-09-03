@@ -9,6 +9,8 @@ const dbConnection = require('./config/database')
 const { errorHandler, notFound } = require('./middleware/errorHandler/globalError')
 const userRoute = require('./router/user/userRoute')
 const productRoute = require('./router/product/productRoute')
+const categoryRoute = require('./router/category/categoryRoute')
+const brandRoute = require('./router/brand/brandRoute')
 
 
 const router = express.Router();
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // router configuration
 app.use('/api/v1/user', userRoute)
 app.use('/api/v1/product', productRoute)
+app.use('/api/v1/category', categoryRoute)
+app.use('/api/v1/brand', brandRoute)
 
 
 // page not found

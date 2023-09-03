@@ -29,6 +29,9 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    sales: {
+        type: Number,
+    },
     image: [{
         type: String,
     }],
@@ -57,15 +60,15 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "brand",
     },
-    category: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "category",
-    }],
-    color: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "color",
-    }
-
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
+    category: [String],
+    color: [String],
+},
+{
+    timestamps: true,
 })
 
 const Product = mongoose.model("Product", productSchema)
