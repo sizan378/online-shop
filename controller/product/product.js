@@ -19,7 +19,7 @@ async function createProduct(req, res)  {
             message: 'Product created successfully'
             })
     } catch (error) {
-        res.status(error.status).json({
+        res.status(error.status || 500).json({
             error: error.message,
             stack: error.stack
         })
@@ -35,7 +35,7 @@ async function updateProduct(req, res) {
             })
         }
     } catch (error) {
-        res.status({
+        res.status(error.status || 500).json({
             error: error.message,
             stack: error.stack
         })
@@ -49,7 +49,7 @@ async function singleProduct(req, res) {
             res.status(200).json(product)
         }
     } catch (error) {
-        res.status({
+        res.status(error.status || 500).json({
             error: error.message,
             stack: error.stack
         })
@@ -63,7 +63,7 @@ async function allProduct(req, res) {
         res.status(200).json(product)
         
     } catch (error) {
-        res.status({
+        res.status(error.status || 500).json({
             error: error.message,
             stack: error.stack
         })
