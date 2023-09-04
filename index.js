@@ -11,6 +11,7 @@ const userRoute = require('./router/user/userRoute')
 const productRoute = require('./router/product/productRoute')
 const categoryRoute = require('./router/category/categoryRoute')
 const brandRoute = require('./router/brand/brandRoute')
+const stockRoute = require('./router/stock/stockRoute')
 
 
 const router = express.Router();
@@ -32,6 +33,7 @@ app.use('/api/v1/user', userRoute)
 app.use('/api/v1/product', productRoute)
 app.use('/api/v1/category', categoryRoute)
 app.use('/api/v1/brand', brandRoute)
+app.use('/api/v1/stock', stockRoute)
 
 
 // page not found
