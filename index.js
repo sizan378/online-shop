@@ -28,6 +28,11 @@ app.use(express.urlencoded({ extended: true }))
 // static folder setup
 app.use(express.static(path.join(__dirname, 'public')));
 
+// set view engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+
 // router configuration
 app.use('/api/v1/user', userRoute)
 app.use('/api/v1/product', productRoute)
