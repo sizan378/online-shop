@@ -3,6 +3,10 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const path = require('path');
 
+// swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger.json');
+
 
 // internal imports
 const dbConnection = require('./config/database')
@@ -39,6 +43,10 @@ app.use('/api/v1/product', productRoute)
 app.use('/api/v1/category', categoryRoute)
 app.use('/api/v1/brand', brandRoute)
 app.use('/api/v1/stock', stockRoute)
+
+
+// swagger routes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 // page not found

@@ -10,8 +10,6 @@ const is_live = false //true for live, false for sandbox
 // tran_id generator
 tran_id = uuidv4()
 
-console.log("tran_id", tran_id)
-
 
 const balanceCashIn = (req, res, next) => {
     const data = {
