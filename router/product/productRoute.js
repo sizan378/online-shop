@@ -9,6 +9,7 @@ const { productValidation, productValidationHandler } = require('../../middlewar
 const {createProduct, updateProduct, singleProduct, allProduct} = require('../../controller/product/product')
 const { createComment, createReview } = require('../../controller/product/productReviewComment')
 const ImageUpload = require('../../utils/imageUpload')
+const purchaseHistoryCreate = require('../../controller/purchaseHistory/purchaseHistoryCreate')
 
 router.use(tokenValidation)
 router.route('/')
@@ -24,6 +25,10 @@ router.route('/comment/:id')
 
 router.route('/review/:id')
     .post(createReview)
+
+// product purchase request
+router.route('/purchase')
+    .post(purchaseHistoryCreate)
 
 
 module.exports = router
