@@ -16,10 +16,7 @@ const stockManagementSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'brand',
     },
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'category',
-    },
+    category: [String],
     color: [String],
     mrp: {
         type: Number,

@@ -17,7 +17,7 @@ router.route('/')
     .get(allProduct)
 
 router.route('/:id')
-    .put(updateProduct)
+    .put(ImageUpload, updateProduct)
     .get(singleProduct)
 
 router.route('/comment/:id')
