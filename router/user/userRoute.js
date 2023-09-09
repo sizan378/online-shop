@@ -12,7 +12,7 @@ const refreshToken = require('../../utils/refreshToken');
 const { userBalanceList, userBalance, userBalanceCreate } = require('../../controller/user/user_operation/userBalance')
 const { createPaymentHistory, paymentHistoryList } = require('../../controller/paymentHistory/paymentHistory')
 const balanceCashIn = require('../../utils/sslcommerz/sslcommerzSetup')
-
+const userList = require('../../controller/user/user_operation/userList')
 
 router.post('/register', userValidation, validationHandler, userRegistrations)
 router.post('/login', userLogin)
@@ -22,6 +22,7 @@ router.use(tokenValidation)
 router.put('/user-update/:id', userInfoUpdate)
 router.put('/change-password/:id', userPasswordChange)
 router.get('/details/:id', userDetails)
+router.get('/list', userList)
 
 // user balance
 router.post('/cash-in/', balanceCashIn, userBalanceCreate)
